@@ -6,7 +6,6 @@ import AuthHeader from '../Auth/Header';
 const Wrapper = styled.div`
 	background: ${colors.white};
 	width: 100vw;
-	height: 100vh;
 `;
 
 interface IPageWrapperProps {

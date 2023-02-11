@@ -1,19 +1,21 @@
-import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import {
+	MailOutlined,
+	LockOutlined,
+	SmileOutlined,
+	UserOutlined,
+} from '@ant-design/icons';
 
 import { checkSubmitDisabled } from '../../utils/schemas';
-import { SignInSchema } from '../../schemas/auth';
-import { FieldName, ISignInSchema } from '../../schemas/types';
+import { FieldName, ISignUpSchema } from '../../schemas/types';
 import { extractErrorTranslation } from '../../utils/localization';
+import { SignUpSchema } from '../../schemas/auth';
 
 import PageWrapper from '../../components/UI/PageWrapper';
 import AuthIntro from '../../components/Auth/Intro';
 import SocialAuth from '../../components/Auth/Social';
-import AuthRedirect from '../../components/Auth/Redirect';
 import InputField from '../../components/Form/InputField';
 import Divider from '../../components/Auth/Divider';
 import Text from '../../components/UI/Text';
@@ -23,11 +25,20 @@ import {
 	RememberMe,
 	SubmitButton,
 } from './styled';
+import AuthRedirect from '../../components/Auth/Redirect';
 
 const inputs = [
 	{
 		field: 'email',
 		prefix: <MailOutlined />,
+	},
+	{
+		field: 'firstName',
+		prefix: <SmileOutlined />,
+	},
+	{
+		field: 'lastName',
+		prefix: <UserOutlined />,
 	},
 	{
 		field: 'password',
@@ -36,32 +47,32 @@ const inputs = [
 	},
 ];
 
-const Login = () => {
-	const [rememberMe, setRememberMe] = useState<boolean>(false);
+const SignUp = () => {
 	const { t } = useTranslation();
 	const {
 		handleSubmit,
 		formState: { errors, dirtyFields },
 		control,
 	} = useForm({
-		resolver: yupResolver(SignInSchema),
+		resolver: yupResolver(SignUpSchema),
 		mode: 'onChange',
 		defaultValues: {
 			email: '',
+			firstName: '',
+			lastName: '',
 			password: '',
 		},
 	});
 
-	const onSubmit = (data: ISignInSchema) => {
+	const onSubmit = (data: ISignUpSchema) => {
 		console.log({
 			...data,
-			rememberMe,
 		});
 	};
 
 	return (
 		<PageWrapper>
-			<AuthIntro mode="signIn" />
+			<AuthIntro mode="signUp" />
 			<AuthContainer>
 				<SocialAuth />
 				<Divider />
@@ -70,7 +81,7 @@ const Login = () => {
 						<Controller
 							key={input.field}
 							control={control}
-							name={input.field as 'email' | 'password'}
+							name={input.field as FieldName}
 							render={({ field: { onChange } }) => (
 								<InputField
 									prefix={input.prefix}
@@ -87,32 +98,23 @@ const Login = () => {
 							)}
 						/>
 					))}
-					<SignInControls>
-						<RememberMe>
-							<Checkbox
-								checked={rememberMe}
-								onChange={() => setRememberMe(!rememberMe)}
-							/>
-							<Text size={16}>{t('auth.rememberMe')}</Text>
-						</RememberMe>
-					</SignInControls>
 					<SubmitButton
 						onClick={handleSubmit(onSubmit)}
 						size="large"
 						type="primary"
 						disabled={checkSubmitDisabled(
 							errors,
-							['email', 'password'],
+							['email', 'password', 'firstName', 'lastName'],
 							dirtyFields
 						)}
 					>
-						{t('auth.signIn.submit')}
+						{t('auth.signUp.submit')}
 					</SubmitButton>
 				</form>
 			</AuthContainer>
-			<AuthRedirect mode="signIn" />
+			<AuthRedirect mode="signUp" />
 		</PageWrapper>
 	);
 };
 
-export default Login;
+export default SignUp;

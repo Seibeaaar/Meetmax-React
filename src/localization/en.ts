@@ -21,6 +21,7 @@ export default {
 		google: 'Log in with Google',
 		facebook: 'Log in with Facebook',
 		or: 'or',
+		rememberMe: 'Remember me',
 		forgotPassword: {
 			header: 'Forgot password?',
 			subtitle: 'Enter your details to receive a reset link',
@@ -33,18 +34,25 @@ export default {
 				required: 'Email required',
 			},
 			password: {
-				invalid: 'Invalid password',
+				invalid:
+					'Password should be at least 6 characters long, including 1 digit, 1 special character, 1 uppercase & 1 lowercase letter',
 				required: 'Password required',
+				tooLong: 'Password shouldn\'t be longer than 16 characters',
 			},
-			name: {
-				invalid: 'Invalid user name',
-				required: 'User name required',
+			firstName: {
+				invalid: 'Invalid first name',
+				required: 'First name required',
+			},
+			lastName: {
+				invalid: 'Invalid last name',
+				required: 'Last name required',
 			},
 		},
 		placeholders: {
 			email: 'Email',
 			password: 'Password',
-			name: 'Name',
+			firstName: 'First name',
+			lastName: 'Last name',
 			dob: 'Date of birth',
 		},
 	},

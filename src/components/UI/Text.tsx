@@ -12,7 +12,10 @@ interface ITextProps {
 
 const Text = styled.p<ITextProps>`
 	font-size: ${(props) => props.size}px;
-	line-height: ${(props) => props.lineHeight || props.size * 1.2}px;
+	line-height: ${(props) =>
+		typeof props.lineHeight !== undefined
+			? props.lineHeight
+			: props.size * 1.2}px;
 	font-weight: ${(props) => props.weight || '400'};
 	color: ${(props) => props.color || colors.greyPrimary};
 `;

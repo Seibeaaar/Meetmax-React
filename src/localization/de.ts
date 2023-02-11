@@ -21,6 +21,7 @@ export default {
 		google: 'Login mit Google',
 		facebook: 'Login mit Facebook',
 		or: 'oder',
+		rememberMe: 'Angemeldet bleiben',
 		forgotPassword: {
 			header: 'Passwort vergessen?',
 			subtitle:
@@ -34,18 +35,25 @@ export default {
 				required: 'E-Mail erforderlich',
 			},
 			password: {
-				invalid: 'Ungültige Password',
+				invalid:
+					'Passwort sollte mindestens 6 Zeichen lang sein, einschließlich 1 Ziffer, 1 Sonderzeichen, 1 Großbuchstabe und 1 Kleinbuchstabe',
 				required: 'Password erforderlich',
+				tooLong: 'Passwort sollte nicht länger als 16 Zeichen sein',
 			},
-			name: {
-				invalid: 'Ungültige Name',
-				required: 'Name erforderlich',
+			firstname: {
+				invalid: 'Ungültige Vorname',
+				required: 'Vorname erforderlich',
+			},
+			lastName: {
+				invalid: 'Ungültige Nachname',
+				required: 'Nachname erforderlich',
 			},
 		},
 		placeholders: {
 			email: 'Email',
 			password: 'Password',
-			name: 'Name',
+			firstName: 'Vorname',
+			lastName: 'Nachname',
 			dob: 'Geburtsdatum',
 		},
 	},
